@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class GameOfLife extends JFrame implements ActionListener {
@@ -14,6 +12,7 @@ public class GameOfLife extends JFrame implements ActionListener {
     private JButton play;
     private JButton clear;
     private JButton reset;
+    private JButton stop;
 
     private CellArray initialState;
     private CellArray startState;
@@ -39,9 +38,11 @@ public class GameOfLife extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        this.setTitle("Conway's Game Of Life");
         this.setVisible(true);
         this.setLocation(width, height);
         this.setLocationRelativeTo(null);
+
     }
 
     private void initComponents(CellArray state) {
@@ -86,9 +87,10 @@ public class GameOfLife extends JFrame implements ActionListener {
         play.setPreferredSize(new Dimension(125, 50));
         playStopPanel.add(play);
 
-        JButton stop = new JButton(STOP);
+        stop = new JButton(STOP);
         stop.addActionListener(this);
         stop.setPreferredSize(new Dimension(125, 50));
+        stop.setEnabled(false);
         playStopPanel.add(stop);
 
         buttonsPanel.add(playStopPanel);
@@ -135,6 +137,7 @@ public class GameOfLife extends JFrame implements ActionListener {
         next.setEnabled(false);
         clear.setEnabled(false);
         reset.setEnabled(false);
+        stop.setEnabled(true);
 
         for (int row = 0; row < 6; row++){
             for (int column = 0; column < 8; column++){
@@ -168,6 +171,7 @@ public class GameOfLife extends JFrame implements ActionListener {
         play.setEnabled(true);
         clear.setEnabled(true);
         reset.setEnabled(true);
+        stop.setEnabled(false);
     }
 
     private void clearGrid() {
