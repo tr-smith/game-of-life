@@ -116,15 +116,17 @@ public class GameOfLife extends JFrame implements ActionListener {
 
     private void showNextGeneration() {
         CellArray currentGeneration = new CellArray(grid.length, grid[0].length);
-        for (int row = 0; row < grid.length; row++){
-            for (int column = 0; column < grid[0].length; column++){
+        int rows = grid.length;
+        int columns = grid[0].length;
+        for (int row = 0; row < rows; row++){
+            for (int column = 0; column < columns; column++){
                 Cell cell = grid[row][column].isSelected() ? Cell.LIVE_CELL : Cell.DEAD_CELL;
                 currentGeneration.setCellAt(row, column, cell);
             }
         }
         CellArray nextGeneration = cellArrayService.getNextGeneration(currentGeneration);
-        for (int row = 0; row < 6; row++){
-            for (int column = 0; column < 8; column++){
+        for (int row = 0; row < rows; row++){
+            for (int column = 0; column < columns; column++){
                 grid[row][column].setSelected(nextGeneration.getCellAt(row, column).isAlive());
             }
         }
@@ -133,14 +135,16 @@ public class GameOfLife extends JFrame implements ActionListener {
     }
 
     private void playNextGeneration() {
+        int rows = grid.length;
+        int columns = grid[0].length;
         play.setEnabled(false);
         next.setEnabled(false);
         clear.setEnabled(false);
         reset.setEnabled(false);
         stop.setEnabled(true);
 
-        for (int row = 0; row < 6; row++){
-            for (int column = 0; column < 8; column++){
+        for (int row = 0; row < rows; row++){
+            for (int column = 0; column < columns; column++){
                 grid[row][column].setEnabled(false);
             }
         }
@@ -161,9 +165,11 @@ public class GameOfLife extends JFrame implements ActionListener {
     }
 
     private void stopNextGeneration() {
+        int rows = grid.length;
+        int columns = grid[0].length;
         isPlaying = false;
-        for (int row = 0; row < 6; row++){
-            for (int column = 0; column < 8; column++){
+        for (int row = 0; row < rows; row++){
+            for (int column = 0; column < columns; column++){
                 grid[row][column].setEnabled(true);
             }
         }
